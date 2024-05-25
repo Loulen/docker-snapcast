@@ -10,6 +10,16 @@ Should get used in conjunction with a player, that plays to a FIFO, like:
 - https://github.com/sweisgerber/docker-mopidy
 - [or any other player](https://github.com/badaix/snapcast#setup-of-audio-playersserver).
 
+## How to run ?
+1. Build the image using the Dockerfile
+2. Run using docker compose 
+  - might be necessary to run it multiple times if there is the following error:
+  ```bash
+  snapcast-1  | 2024-05-25 16-43-27.515 [Info] (Snapserver) Adding source: tcp://0.0.0.0:4953?name=tcp_global
+  snapcast-1  | terminate called after throwing an instance of 'SnapException'
+  snapcast-1  |   what():  failed to create settings directory: "/root/.config/snapserver/": 13
+```
+
 ## Features Include:
 
 - SnapServer w/ [sane defaults](./root/defaults/snapserver.conf)
@@ -29,6 +39,13 @@ Should get used in conjunction with a player, that plays to a FIFO, like:
 ## docker-compose
 
 I strongly advice to use docker-compose, as using a docker commandline is quite annoying with a complex setup.
+
+/!\ To get the audio group ID 
+```bash
+getent group audio
+```
+response ex : audio:x:**29**:
+
 An example can get found [in the repository](./docker-compose.example.yml).
 
 ```yaml
@@ -39,7 +56,7 @@ services:
     hostname: snapcast
     environment:
       - PUID=1000
-      - PGID=1000 # set to audio group ID
+      - PGID=29 # set to audio group ID
       - TZ=Europe/Berlin
       - START_SNAPCLIENT=false # set to `true` for snapclient to start
       # --host: name or ip of compose service or dockerhost

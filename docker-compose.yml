@@ -1,11 +1,10 @@
-version: "3"
 services:
   snapcast:
-    image: docker.io/sweisgerber/snapcast:latest
+    image: brico-snapcast:latest
     hostname: snapcast
     environment:
       - PUID=1000
-      - PGID=1000 # set to audio group ID
+      - PGID=29 # set to audio group ID
       - TZ=Europe/Berlin
       - START_SNAPCLIENT=false # set to `true` for snapclient to start
       # --host: name or ip of compose service or dockerhost
@@ -18,10 +17,12 @@ services:
       - 1704:1704 # port for the actual audio streaming
       - 1705:1705 # port for TCP Json RPC
       - 1780:1780 # port for the SnapWeb Webinterface
+      - 4953:4953 # port for the Snapcast TCP protocol
+
     # devices:
       # - /dev/snd:/dev/snd # optional, only if you want to use snapclient
     volumes:
-      - /<path>/<to>/<snapcast>/config/:/config/
-      - /<path>/<to>/<snapcast>/data/:/data/
-      # /audio should get used to place FIFOs for audio playback from mpd/mopidy/host/etc
-      - /<path>/<to>/audio-fifos/:/audio/
+      - /home/bricoloc/Documents/docker/snapcast/docker-snapcast/volumes/config/:/config/
+      - /home/bricoloc/Documents/docker/snapcast/docker-snapcast/volumes/data/:/data/
+      # # /audio should get used to place FIFOs for audio playback from mpd/mopidy/host/etc
+      - /home/bricoloc/Documents/docker/snapcast/docker-snapcast/volumes/audio-fifos/:/audio/

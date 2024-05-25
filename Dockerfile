@@ -4,7 +4,7 @@ FROM ghcr.io/linuxserver/baseimage-alpine:edge
 ARG BUILD_DATE
 ARG VERSION
 LABEL build_version="version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="sweisgerber"
+LABEL maintainer="llenoir"
 
 RUN set -ex \
   echo "**** setup apk testing mirror ****" \
@@ -33,5 +33,6 @@ COPY root/ /
 # ports and volumes
 EXPOSE 1704
 EXPOSE 1780
+EXPOSE 4953
 #
 VOLUME /config /data
