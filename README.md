@@ -18,7 +18,14 @@ Should get used in conjunction with a player, that plays to a FIFO, like:
   snapcast-1  | 2024-05-25 16-43-27.515 [Info] (Snapserver) Adding source: tcp://0.0.0.0:4953?name=tcp_global
   snapcast-1  | terminate called after throwing an instance of 'SnapException'
   snapcast-1  |   what():  failed to create settings directory: "/root/.config/snapserver/": 13
-```
+  ```
+3. Change config as needed
+  - Enter spotify credentials in volumes/config/snapserver.conf
+  - uncomment tcp broadcast (can't work with spotify at the same time it seems, comment out librespot if you want to use this feature)
+  
+
+
+
 
 ## Features Include:
 
